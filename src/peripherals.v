@@ -14,6 +14,7 @@
 // 0x800_00c0 - 0ff: UART RX
 // 0x800_0100 - 3ff: 12 user peripherals (64 bytes each, word and halfword access supported, each has an interrupt)
 // 0x800_0400 - 4ff: 16 simple peripherals (16 bytes each, byte access only)
+// 0x800_0600 - 7ff: 8 user peripherals (64 bytes each, word and halfword access supported, no interrupt)
 module tinyQV_peripherals #(parameter CLOCK_MHZ=64) (
     input         clk,
     input         rst_n,
@@ -208,7 +209,7 @@ module tinyQV_peripherals #(parameter CLOCK_MHZ=64) (
     // --------------------------------------------------------------------- //
     // Full interface peripherals
 
-    tqvp_sohaib_npu i_user_peri04(
+    tqvp_cattuto_vgaconsole i_user_peri04 (
         .clk(clk),
         .rst_n(rst_n),
 
@@ -265,7 +266,7 @@ module tinyQV_peripherals #(parameter CLOCK_MHZ=64) (
         .user_interrupt(user_interrupts[6])
     );
 
-    tqvp_full_empty i_user_peri07 (
+    tqvp_jnms_pdm i_user_peri07 (
         .clk(clk),
         .rst_n(rst_n),
 
@@ -284,7 +285,7 @@ module tinyQV_peripherals #(parameter CLOCK_MHZ=64) (
         .user_interrupt(user_interrupts[7])
     );
 
-    tqvp_prism i_prism08 (
+    tqvp_prism i_user_peri08 (
         .clk(clk),
         .rst_n(rst_n),
 
@@ -303,7 +304,7 @@ module tinyQV_peripherals #(parameter CLOCK_MHZ=64) (
         .user_interrupt(user_interrupts[8])
     );
 
-    tqvp_full_empty i_user_peri09 (
+    tqvp_hx2003_pulse_transmitter i_user_peri09 (
         .clk(clk),
         .rst_n(rst_n),
 
@@ -322,7 +323,7 @@ module tinyQV_peripherals #(parameter CLOCK_MHZ=64) (
         .user_interrupt(user_interrupts[9])
     );
 
-    tqvp_jnms_pdm i_pdm10 (
+    tqvp_full_empty i_user_peri10 (
         .clk(clk),
         .rst_n(rst_n),
 
@@ -341,7 +342,7 @@ module tinyQV_peripherals #(parameter CLOCK_MHZ=64) (
         .user_interrupt(user_interrupts[10])
     );
 
-    tqvp_hx2003_pulse_transmitter i_user_peri11 (
+    tqvp_full_empty i_user_peri11 (
         .clk(clk),
         .rst_n(rst_n),
 
@@ -379,7 +380,7 @@ module tinyQV_peripherals #(parameter CLOCK_MHZ=64) (
         .user_interrupt(user_interrupts[12])
     );
 
-    tqvp_cattuto_vgaconsole i_tqvp_cattuto_vgaconsole (
+    tqvp_full_empty i_user_peri13 (
         .clk(clk),
         .rst_n(rst_n),
 
@@ -398,7 +399,7 @@ module tinyQV_peripherals #(parameter CLOCK_MHZ=64) (
         .user_interrupt(user_interrupts[13])
     );
 
-    tqvp_full_empty i_user_peri14 (
+    tqvp_sohaib_npu i_user_peri14 (
         .clk(clk),
         .rst_n(rst_n),
 

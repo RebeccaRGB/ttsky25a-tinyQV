@@ -15,7 +15,7 @@ You can also include images in this folder and reference them in the markdown. E
 
 Author: Han
 
-Peripheral index: 11
+Peripheral index: 9
 
 ## What it does
 Pulse transmitter is a versatile peripheral that can transmit digital waveforms of various durations, with optional support for carrier modulation. Various schemes like Pulse Distance, Pulse Width, Manchester encoding, etc. can be easily implemented. Once the program has been configured, no CPU intervention is required. This makes it ideal for remote control transmitter applications and even makes it suitable to drive other devices like the WS2812B addressable LED.
@@ -29,10 +29,10 @@ Pulse transmitter is a versatile peripheral that can transmit digital waveforms 
 - 4 configurable interrupts (not shown in the architecture diagram)
 
 ### Architecture
-![Pulse Transmitter Architecture](11_pulse_transmitter_architecture.drawio.svg)
+![Pulse Transmitter Architecture](09_pulse_transmitter_architecture.drawio.svg)
 
 ### What is a symbol?
-![Pulse Transmitter Symbol](11_pulse_transmitter_symbol.drawio.svg)
+![Pulse Transmitter Symbol](09_pulse_transmitter_symbol.drawio.svg)
 
 The transmission level and duration is described by a 2-bit **symbol**.
 
@@ -315,7 +315,7 @@ A series of examples intended to be used with the above is presented.
 #### [Example] NEC Remote Control Procotol
 This protocol uses pulse distance encoding, and requires 38kHz modulation which is simple enough. However, there needs to be a 9 ms high, and 4.5ms low pulse to initiate the transmission. This can be handled by the auxillary mask. In this example, you should expect a command of value 88 (integer) to be sent to address 36 (integer) every 500ms.
 
-![NEC Remote Control Procotol Timing Diagram](11_pulse_transmitter_NEC.drawio.svg)
+![NEC Remote Control Procotol Timing Diagram](09_pulse_transmitter_NEC.drawio.svg)
 
 ```
 int main() {
@@ -429,7 +429,7 @@ int main() {
 #### [Example] WS2812B Addressable LED
 The WS2812B needs the bits to be sent MSB (Most Significant Bit) first. Reversing the bits using the CPU is highly inefficient (at least without the bit reverse instruction). Thankfully, we can take advantage of a trick where program counter can count down instead, this effectively sends the bits in reverse. In this example, you should expect 2 connected WS2812B LEDs to light up and animate between colours. This animation loops forever.
 
-![WS2812B Addressable LED Timing Diagram](11_pulse_transmitter_WS2812B.drawio.svg)
+![WS2812B Addressable LED Timing Diagram](09_pulse_transmitter_WS2812B.drawio.svg)
 
 ```
 int main() {
@@ -524,9 +524,9 @@ int main() {
 #### [Extra Experimental Example] Driving Serial Devices like the 74HC595 Shift Register / SPI Mode 0/2 Devices
 While the pulse transmitter peripheral is only single channel, signals like the `symbol_toggle_or_idle_output` and `carrier_or_zero_output` is exposed. The `symbol_toggle_or_idle_output` signal can be used as a clock signal for the 74HC595 Shift Register. The serial data in the program data memory can streamed out. In this example, you should expect the 8 shift register outputs to count in a binary sequence. This procedure loops forever. 
 
-![74HC595 Timing Diagram](11_pulse_transmitter_74HC595.drawio.svg)
+![74HC595 Timing Diagram](09_pulse_transmitter_74HC595.drawio.svg)
 
-![Pulse Transmitter 74HC595 Shift Register Example](11_pulse_transmitter_74HC595.jpg)
+![Pulse Transmitter 74HC595 Shift Register Example](09_pulse_transmitter_74HC595.jpg)
 
 ```
 int main() {
@@ -628,8 +628,8 @@ int main() {
 #### [Extra Experimental Example] Driving Digital-to-analog Converters using Phillips I2S & Left/Right Justified
 The pulse transmitter can be used to drive a suitable DAC like the PCM5102A which do not require a MCLK. While the peripheral is only single channel, signals like `symbol_toggle_or_idle_output` and `carrier_or_zero_output` is exposed. The `symbol_toggle_or_idle_output` signal can be used as a bit clock signal while the `carrier_or_zero_output` is used as the word clock. However, it may be non-trivial to output a bit clock frequency perfectly matches for example 32000 * 32 Hz. With a main clock frequency of 63.5 MHz, the error is less than 0.02%. With a main clock frequency of 64 MHz, the output is off by 0.8%, this might still be acceptable to some DACs. In this example, the stereo DAC is driven at a 32kHz sample rate. You should expect the a sawtooth tone of 440 Hz to be generated. Next, the previous tone is turned off, and a sawtooth tone of 660 Hz is generated. Next, both tones are simultaneously enabled. Next, both tones are disabled. This procedure loops forever.
 
-![I2S Timing Diagram](11_pulse_transmitter_I2S.drawio.svg)
-![I2S Audio Diagram](11_pulse_transmitter_I2S.png)
+![I2S Timing Diagram](09_pulse_transmitter_I2S.drawio.svg)
+![I2S Audio Diagram](09_pulse_transmitter_I2S.png)
 
 ```
 #define SAMPLE_RATE   32000

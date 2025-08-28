@@ -12,7 +12,7 @@ from tqv import TinyQV
 # When submitting your design, change this to the peripheral number
 # in peripherals.v.  e.g. if your design is i_user_peri05, set this to 5.
 # The peripheral number is not used by the test harness.
-PERIPHERAL_NUM = 11
+PERIPHERAL_NUM = 9
 
 MAX_DURATION = 255 # max duration you can put in the duration field
 
